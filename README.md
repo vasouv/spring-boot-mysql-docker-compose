@@ -13,6 +13,8 @@ Moreover, having multiple Docker Compose files means we can use different SQL sc
 ## Standalone MySQL
 `docker-compose -f mysql-standalone.yml up`
 
+The `mysql-standalone.yml` file uses the `mysql-docker/Dockerfile` and populates the database with the `mysql-docker/developers-dump.sql` script.
+
 ## Spring Boot and MySQL for development
 ### Standalone Spring Boot project
 To run the Spring Boot project and have it connect to our local development database using the development profile, we can use the command `mvn spring-boot:run -Dspring-boot.run.profiles=dev`
