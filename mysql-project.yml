@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+
+  mysql:
+    build:
+      context: ./mysql-docker
+      dockerfile: Dockerfile
+    container_name: developers-mysql-container
+    image: developers-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: developers
+    ports:
+      - 3307:3306
+    networks:
+      - developers-network
+
+  project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: developers-container
+    image: developers-service
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/developers
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    depends_on:
+      - mysql
+    networks:
+      - developers-network
+
+networks:
+    developers-network: 
