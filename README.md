@@ -11,8 +11,12 @@ I think a good reason to have such Docker Compose files is to easily run the app
 Moreover, having multiple Docker Compose files means we can use different SQL scripts to load the databases upon start so we don't mess with our local one.
 
 ## Standalone MySQL
-``` docker-compose -f mysql-standalone.yml up ```
+`docker-compose -f mysql-standalone.yml up`
 
 ## Spring Boot and MySQL for development
+### Standalone Spring Boot project
+To run the Spring Boot project and have it connect to our local development database using the development profile, we can use the command `mvn spring-boot:run -Dspring-boot.run.profiles=dev`
+
+This way, whatever values are present in the `application-dev.properties` will be used. Also, the database must be running on our local machine and the tables must be present, otherwise the run command will fail.
 
 ## Spring Boot and MySQL for QA
